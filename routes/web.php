@@ -19,15 +19,16 @@ use Illuminate\Support\Facades\Route;
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
-// no Auth routes
-Route::get('{any?}', function () {
-    return view('guest.home');
-})->where("any",".*");
+
 
 // Auth routes
 Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/', 'HomeController@index')->name('index');
-
+    Route::resource('/posts', PostsController::class);
 });
 
+// no Auth routes
+Route::get('{any?}', function () {
+    return view('guest.home');
+})->where("any",".*");
 

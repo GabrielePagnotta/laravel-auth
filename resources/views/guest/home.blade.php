@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('page-title','Homepage-user')
 @section('content')
-    <h1>Benvenuto guest</h1>
+<h1>adsad</h1>
 @endsection
