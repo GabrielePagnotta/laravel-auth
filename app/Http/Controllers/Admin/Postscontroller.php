@@ -14,7 +14,7 @@ class Postscontroller extends Controller
      */
     public function index()
     {
-        $data=Post::All();
+        $data=Post::paginate(8);
         return view('admin.post.index',compact('data'));
     }
 

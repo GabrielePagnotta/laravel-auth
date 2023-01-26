@@ -15,12 +15,14 @@
 
     <tr>
         <td>{{$elem->id}}</td>
-      <td>{{$elem->name}}</td>
-      <td>{{$elem->lastname}}</td>
+      <td>{{$elem->title}}</td>
+      <td>{{$elem->body}}</td>
     </tr>
     @endforeach
   </tbody>
 </table>
+<div class="d-flex justify-content-center my-5">
 
-
+    {{$data->links()}}
+</div>
 @endsection
