@@ -25,7 +25,7 @@ class Postscontroller extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.post.create');
     }
 
     /**
@@ -36,7 +36,17 @@ class Postscontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $datas=$request->all();
+
+        $request->validate([
+            'title'=>'required',
+            'body'=>'required'
+        ]);
+        $newpost= new Post();
+        $newpost->title=$datas['title'];
+        $newpost->body=$datas['body'];
+        $newpost->save();
+        return redirect()->route('admin.posts.index');
     }
 
     /**
@@ -47,7 +57,9 @@ class Postscontroller extends Controller
      */
     public function show($id)
     {
-        //
+        $show=Post::findOrFail($id);
+
+        return view('admin.post.show',compact('show'));
     }
 
     /**
@@ -58,7 +70,8 @@ class Postscontroller extends Controller
      */
     public function edit($id)
     {
-        //
+        $data=Post::findOrFail($id);
+        return view('admin.post.edit',compact('data'));
     }
 
     /**
@@ -70,7 +83,10 @@ class Postscontroller extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $singolopost= Post::findOrFail($id);
+        $singolopost->update($data);
+        return redirect()->route('admin.posts.index',$singolopost->id);
     }
 
     /**
@@ -81,6 +97,9 @@ class Postscontroller extends Controller
      */
     public function destroy($id)
     {
-        //
+        $destroy= Post::findOrFail($id);
+        $destroy->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }
